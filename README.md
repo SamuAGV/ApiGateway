@@ -1,75 +1,7 @@
-Aquí tienes el README listo para copiar y pegar directamente en GitHub:
+````markdown
+# 🚀 ApiGateway
 
----
-
-```markdown
-# 🚀 API Gateway + React App
-
-Proyecto completo que integra **AWS API Gateway**, **AWS Lambda** y un **frontend en React** desplegado en **AWS Amplify**.
-
-## 📋 Tabla de Contenidos
-
-- [Arquitectura](#arquitectura)
-- [Tecnologías](#tecnologías)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Requisitos Previos](#requisitos-previos)
-- [Instalación Local](#instalación-local)
-- [Despliegue](#despliegue)
-- [Endpoints de la API](#endpoints-de-la-api)
-- [Variables de Entorno](#variables-de-entorno)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
-
----
-
-## 🏗️ Arquitectura
-
-```
-Cliente (React)
-     │
-     ▼
-AWS Amplify (Hosting)
-     │
-     ▼
-API Gateway (REST API)
-     ├── Stage: dev  → Lambda dev ($LATEST)  → "Hola dev"
-     └── Stage: prod → Lambda prod (versión 1) → "Hola prod"
-```
-
-### Flujo de datos:
-1. El frontend React hace peticiones a API Gateway
-2. API Gateway enruta según el stage (`/dev` o `/prod`)
-3. Lambda procesa y devuelve la respuesta
-4. React muestra el resultado en pantalla
-
----
-
-## 🛠️ Tecnologías
-
-| Capa | Tecnología |
-|------|-------------|
-| **Frontend** | React 18, JavaScript, CSS |
-| **API Gateway** | AWS API Gateway (REST API) |
-| **Backend** | AWS Lambda (Python 3.12) |
-| **Hosting** | AWS Amplify |
-| **Control de versiones** | Git + GitHub |
-
----
-
-## 📁 Estructura del Proyecto
-
-```
-ApiGateway/
-├── public/                 # Archivos estáticos
-├── src/
-│   ├── App.js             # Componente principal con llamadas a API
-│   ├── App.css            # Estilos
-│   └── index.js           # Punto de entrada
-├── .gitignore             # Archivos ignorados por Git
-├── package.json           # Dependencias y scripts
-├── package-lock.json      # Versiones exactas de dependencias
-└── README.md              # Este archivo
-```
+Proyecto que integra **AWS Lambda + API Gateway** con un frontend desplegado en **AWS Amplify**.
 
 ---
 
@@ -89,7 +21,7 @@ ApiGateway/
 ```bash
 git clone https://github.com/SamuAGV/ApiGateway.git
 cd ApiGateway
-```
+````
 
 ### 2. Instalar dependencias
 
@@ -123,22 +55,26 @@ Las funciones Lambda y API Gateway fueron desplegadas manualmente desde AWS Cons
 
 **Endpoints desplegados:**
 
-| Stage | URL | Respuesta |
-|-------|-----|-----------|
-| dev | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/dev/dev` | `"Hola dev"` |
-| prod | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/prod/prod` | `"Hola prod"` |
+| Stage | URL                                                                | Respuesta     |
+| ----- | ------------------------------------------------------------------ | ------------- |
+| dev   | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/dev/dev`   | `"Hola dev"`  |
+| prod  | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/prod/prod` | `"Hola prod"` |
+
+---
 
 ### Frontend (AWS Amplify)
 
 1. Sube el código a GitHub
-2. Ve a **AWS Amplify** → **Hosting** → **Get started**
+2. Ve a **AWS Amplify → Hosting → Get started**
 3. Conecta con GitHub y selecciona el repositorio `SamuAGV/ApiGateway`
 4. Configura:
-   - Build command: `npm run build`
-   - Publish directory: `build`
+
+   * Build command: `npm run build`
+   * Publish directory: `build`
 5. Haz clic en **Save and deploy**
 
-**URL desplegada:** `https://main.d2lydpeopg01uz.amplifyapp.com`
+**URL desplegada:**
+👉 [https://main.d2lydpeopg01uz.amplifyapp.com](https://main.d2lydpeopg01uz.amplifyapp.com)
 
 ---
 
@@ -146,10 +82,12 @@ Las funciones Lambda y API Gateway fueron desplegadas manualmente desde AWS Cons
 
 ### Método: `GET`
 
-| Endpoint | Respuesta |
-|----------|-----------|
-| `/dev/dev` | `"Hola dev"` |
+| Endpoint     | Respuesta     |
+| ------------ | ------------- |
+| `/dev/dev`   | `"Hola dev"`  |
 | `/prod/prod` | `"Hola prod"` |
+
+---
 
 ### Ejemplo con `curl`
 
@@ -176,12 +114,12 @@ const PROD_API_URL = 'https://or9112xy9d.execute-api.us-east-1.amazonaws.com/pro
 
 ## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas. Por favor:
+Las contribuciones son bienvenidas:
 
-1. Fork el proyecto
-2. Crea tu rama (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -m 'Agrega nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+1. Haz un fork del proyecto
+2. Crea una rama (`git checkout -b feature/nueva-funcionalidad`)
+3. Realiza tus cambios (`git commit -m 'Agrega nueva funcionalidad'`)
+4. Sube la rama (`git push origin feature/nueva-funcionalidad`)
 5. Abre un Pull Request
 
 ---
@@ -194,18 +132,18 @@ Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICE
 
 ## 👨‍💻 Autor
 
-**Samuel Garduño**
+**Samuel Antonio Garduño Viviana**
 
-- GitHub: [@SamuAGV](https://github.com/SamuAGV)
+* GitHub: [@SamuAGV](https://github.com/SamuAGV)
 
 ---
 
 ## 🐛 Problemas conocidos
 
-| Problema | Estado | Solución |
-|----------|--------|----------|
-| CORS en desarrollo local | ✅ Resuelto | Configurado `Access-Control-Allow-Origin: *` |
-| Build fallando en Amplify | ✅ Resuelto | Regenerado `package-lock.json` |
+| Problema                  | Estado     | Solución                                     |
+| ------------------------- | ---------- | -------------------------------------------- |
+| CORS en desarrollo local  | ✅ Resuelto | Configurado `Access-Control-Allow-Origin: *` |
+| Build fallando en Amplify | ✅ Resuelto | Regenerado `package-lock.json`               |
 
 ---
 
@@ -217,5 +155,7 @@ Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICE
 
 ---
 
-**¡Gracias por visitar este proyecto!** ⭐
+⭐ **Si te gusta el proyecto, dale una estrella en GitHub**
+
+```
 ```
