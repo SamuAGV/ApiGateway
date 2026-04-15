@@ -1,70 +1,221 @@
-# Getting Started with Create React App
+Aquí tienes el README listo para copiar y pegar directamente en GitHub:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+```markdown
+# 🚀 API Gateway + React App
 
-In the project directory, you can run:
+Proyecto completo que integra **AWS API Gateway**, **AWS Lambda** y un **frontend en React** desplegado en **AWS Amplify**.
 
-### `npm start`
+## 📋 Tabla de Contenidos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Arquitectura](#arquitectura)
+- [Tecnologías](#tecnologías)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación Local](#instalación-local)
+- [Despliegue](#despliegue)
+- [Endpoints de la API](#endpoints-de-la-api)
+- [Variables de Entorno](#variables-de-entorno)
+- [Contribuciones](#contribuciones)
+- [Licencia](#licencia)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🏗️ Arquitectura
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+Cliente (React)
+     │
+     ▼
+AWS Amplify (Hosting)
+     │
+     ▼
+API Gateway (REST API)
+     ├── Stage: dev  → Lambda dev ($LATEST)  → "Hola dev"
+     └── Stage: prod → Lambda prod (versión 1) → "Hola prod"
+```
 
-### `npm run build`
+### Flujo de datos:
+1. El frontend React hace peticiones a API Gateway
+2. API Gateway enruta según el stage (`/dev` o `/prod`)
+3. Lambda procesa y devuelve la respuesta
+4. React muestra el resultado en pantalla
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Tecnologías
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Capa | Tecnología |
+|------|-------------|
+| **Frontend** | React 18, JavaScript, CSS |
+| **API Gateway** | AWS API Gateway (REST API) |
+| **Backend** | AWS Lambda (Python 3.12) |
+| **Hosting** | AWS Amplify |
+| **Control de versiones** | Git + GitHub |
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📁 Estructura del Proyecto
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+ApiGateway/
+├── public/                 # Archivos estáticos
+├── src/
+│   ├── App.js             # Componente principal con llamadas a API
+│   ├── App.css            # Estilos
+│   └── index.js           # Punto de entrada
+├── .gitignore             # Archivos ignorados por Git
+├── package.json           # Dependencias y scripts
+├── package-lock.json      # Versiones exactas de dependencias
+└── README.md              # Este archivo
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📋 Requisitos Previos
 
-## Learn More
+- Node.js (v18 o superior)
+- npm (v9 o superior)
+- Cuenta de AWS (opcional para despliegue)
+- Git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 💻 Instalación Local
 
-### Code Splitting
+### 1. Clonar el repositorio
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+git clone https://github.com/SamuAGV/ApiGateway.git
+cd ApiGateway
+```
 
-### Analyzing the Bundle Size
+### 2. Instalar dependencias
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm install
+```
 
-### Making a Progressive Web App
+### 3. Ejecutar en modo desarrollo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm start
+```
 
-### Advanced Configuration
+La aplicación estará disponible en `http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 4. Build para producción
 
-### Deployment
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Los archivos compilados se generan en la carpeta `/build`
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ☁️ Despliegue
+
+### Backend (AWS Lambda + API Gateway)
+
+Las funciones Lambda y API Gateway fueron desplegadas manualmente desde AWS Console.
+
+**Endpoints desplegados:**
+
+| Stage | URL | Respuesta |
+|-------|-----|-----------|
+| dev | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/dev/dev` | `"Hola dev"` |
+| prod | `https://or9112xy9d.execute-api.us-east-1.amazonaws.com/prod/prod` | `"Hola prod"` |
+
+### Frontend (AWS Amplify)
+
+1. Sube el código a GitHub
+2. Ve a **AWS Amplify** → **Hosting** → **Get started**
+3. Conecta con GitHub y selecciona el repositorio `SamuAGV/ApiGateway`
+4. Configura:
+   - Build command: `npm run build`
+   - Publish directory: `build`
+5. Haz clic en **Save and deploy**
+
+**URL desplegada:** `https://main.d2lydpeopg01uz.amplifyapp.com`
+
+---
+
+## 🔗 Endpoints de la API
+
+### Método: `GET`
+
+| Endpoint | Respuesta |
+|----------|-----------|
+| `/dev/dev` | `"Hola dev"` |
+| `/prod/prod` | `"Hola prod"` |
+
+### Ejemplo con `curl`
+
+```bash
+# Stage dev
+curl https://or9112xy9d.execute-api.us-east-1.amazonaws.com/dev/dev
+
+# Stage prod
+curl https://or9112xy9d.execute-api.us-east-1.amazonaws.com/prod/prod
+```
+
+---
+
+## 🔧 Variables de Entorno
+
+Si necesitas cambiar los endpoints de la API, edita `src/App.js`:
+
+```javascript
+const DEV_API_URL = 'https://or9112xy9d.execute-api.us-east-1.amazonaws.com/dev/dev';
+const PROD_API_URL = 'https://or9112xy9d.execute-api.us-east-1.amazonaws.com/prod/prod';
+```
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea tu rama (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit tus cambios (`git commit -m 'Agrega nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+## 👨‍💻 Autor
+
+**Samuel Garduño**
+
+- GitHub: [@SamuAGV](https://github.com/SamuAGV)
+
+---
+
+## 🐛 Problemas conocidos
+
+| Problema | Estado | Solución |
+|----------|--------|----------|
+| CORS en desarrollo local | ✅ Resuelto | Configurado `Access-Control-Allow-Origin: *` |
+| Build fallando en Amplify | ✅ Resuelto | Regenerado `package-lock.json` |
+
+---
+
+## 📊 Estado del Proyecto
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Deployment](https://img.shields.io/badge/deployment-amplify-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+---
+
+**¡Gracias por visitar este proyecto!** ⭐
+```
